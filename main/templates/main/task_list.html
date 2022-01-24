@@ -1,4 +1,4 @@
 <h2>List of tasks</h2>
 {% for task in object_list %}
-    <h4><a href="{% url 'detail' slug %}">{{ task }}</a></h4>
+    <h4><a href="{{ task.get_absolute_url }}">{{ task }}</a></h4>
 {% endfor %}
