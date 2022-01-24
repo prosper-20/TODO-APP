@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Task
 
 
@@ -16,4 +16,17 @@ class TaskDetailView(DetailView):
 class TaskCreateView(CreateView):
     model = Task
     fields = "__all__"
+
+class TaskUpdateView(UpdateView):
+    model = Task
+    fields = "__all__"
+
+
+class TaskDeleteView(DeleteView):
+    model = Task
+    success_url = "/"
+
+
+
+
     
