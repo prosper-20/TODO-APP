@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Task(models.Model):
-    user = m
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    title = models.CharField(max_length=50)
