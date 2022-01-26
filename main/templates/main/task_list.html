@@ -1,4 +1,6 @@
 <h2>List of tasks</h2>
 {% for task in tasks %}
     <h4><a href="{{ task.get_absolute_url }}">{{ task }}</a></h4>
+    <a href="{% url 'delete' task.slug %}">Delete</a>
+    <a href="{% url 'update' task.slug %}">Update</a>
 {% endfor %}

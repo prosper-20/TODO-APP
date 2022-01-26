@@ -1,6 +1,14 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Task
+from django.contrib.auth.mixins import UserLoginRequiredMixin
+from django.contrib.auth.views import LoginView
+
+
+class CustomLoginView(LoginView):
+    template_name = 'main/login.html'
+    fields = "__all__"
+    redirect_authenticated_user = True
 
 
 class TaskView(ListView):
