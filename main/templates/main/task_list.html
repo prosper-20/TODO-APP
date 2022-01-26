@@ -1,3 +1,9 @@
+{% if request.user is authenticated %}
+<h5>{{ request.user }}</h5>
+<a href="{% url 'logout' %}">Logout</a>
+{% else %}
+<a href="{% url 'login' %}">Login</a>
+
 <h2>List of tasks</h2>
 {% for task in tasks %}
     <h4><a href="{{ task.get_absolute_url }}">{{ task }}</a></h4>

@@ -1,4 +1,6 @@
+from audioop import reverse
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Task
 from django.contrib.auth.mixins import UserLoginRequiredMixin
@@ -9,6 +11,9 @@ class CustomLoginView(LoginView):
     template_name = 'main/login.html'
     fields = "__all__"
     redirect_authenticated_user = True
+
+    def get_absolute_url(self):
+        return reverse_lazy("tasks")
 
 
 class TaskView(ListView):
