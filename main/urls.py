@@ -16,7 +16,7 @@ urlpatterns = [
     path("task-update/<slug>/", TaskUpdateView.as_view(), name="update"),
     path("task-delete/<slug>/", TaskDeleteView.as_view(), name="delete"),
     path("login/", CustomLoginView.as_view(), name='login'),
-    path("logout/", auth_views.LogoutView.as_view(), name='login'),
+    path("logout/", auth_views.LogoutView.as_view(next_page="login"), name='logout'),
 
 
 ]

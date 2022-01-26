@@ -16,26 +16,32 @@ class CustomLoginView(LoginView):
         return reverse_lazy("tasks")
 
 
-class TaskView(ListView):
+class TaskView(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = "tasks"
 
 
-class TaskDetailView(DetailView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = context['tasks'].filter(user=self.request.user)
+        context['count'] = context['tasks'].filter(complete=False).count()
+        return context
+
+class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
     template_name = "main/task_detail.html"
     context_object_name = "task"
 
-class TaskCreateView(CreateView):
+class TaskCreateView(LoginRequiredMixin, CreateView):
     model = Task
     fields = "__all__"
 
-class TaskUpdateView(UpdateView):
+class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
     fields = "__all__"
 
 
-class TaskDeleteView(DeleteView):
+class TaskDeleteView(LoginRequiredMixin, DeleteView):
     model = Task
     success_url = "/"
 
