@@ -2,6 +2,7 @@ from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.shortcuts import redirect
 
 class Task(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
