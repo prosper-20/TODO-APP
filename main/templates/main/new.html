@@ -1,19 +1,13 @@
-{% if request.user.is_authenticated %}
-<h5>{{ request.user }}</h5>
-<a href="{% url 'logout' %}">Logout</a>
-{% else %}
-<a href="{% url 'login' %}">Login</a>
-{% endif %}
+{{ user.username }}
 
 
-h1>Posts by {{ view.kwargs.username }}</h1>
+h1>Tasks for {{ user }}</h1>
 <!-- ({{ page_obj.paginator.count }}) -->
 {% for task in tasks %}
     <article class="media content-section">
         <!-- <img class="rounded-square article-img" src="{{ post.author.profile.image.url }}" alt="Author's Image"> -->
         <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2" href="{% url 'detail' task.slug %}">{{ task.description }}</a>
            
             <!-- <small id="date">{{ post.date_posted|date:"F d, Y" }}.</small> -->
         </div>
