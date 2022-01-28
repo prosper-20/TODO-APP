@@ -21,8 +21,8 @@ class TaskView(LoginRequiredMixin, ListView):
     context_object_name = "tasks"
 
 
-    def get_context_data(self, slug, **kwargs):
-        context = super().get_context_data(slug, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         context['tasks'] = context['tasks'].filter(user=self.request.user)
         context['count'] = context['tasks'].filter(completed=False).count()
         return context
@@ -39,8 +39,8 @@ class TaskCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        # return super(TaskCreateView, self).form_valid(form)
-        return super().form_valid(self, form)
+        return super(TaskCreateView, self).form_valid(form)
+        
 
 class TaskUpdateView(LoginRequiredMixin, UpdateView):
     model = Task
