@@ -10,7 +10,8 @@ from .views import (
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('', TaskView.as_view(), name="home"),
+    # path('', TaskView.as_view(), name="home"),
+    path("user/<str:username>/", TaskView.as_view(), name="home"),
     path('task-detail/<slug>/', TaskDetailView.as_view(), name="detail"),
     path("task-create/", TaskCreateView.as_view(), name="create"),
     path("task-update/<slug>/", TaskUpdateView.as_view(), name="update"),

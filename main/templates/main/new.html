@@ -13,10 +13,11 @@ h1>Posts by {{ view.kwargs.username }}</h1>
         <!-- <img class="rounded-square article-img" src="{{ post.author.profile.image.url }}" alt="Author's Image"> -->
         <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2" href="">{{ task.description }}</a>
+            <a class="mr-2" href="{% url 'detail' task.slug %}">{{ task.description }}</a>
+           
             <!-- <small id="date">{{ post.date_posted|date:"F d, Y" }}.</small> -->
         </div>
-        <h2><a class="article-title" href="{% task.get_absolute_url %}">{{ post.title }}</a></h2>
+        <h2><a class="article-title" href="">{{ post.title }}</a></h2>
         <p class="article-content">{{ post.content }}</p>
         </div>
     </article>
