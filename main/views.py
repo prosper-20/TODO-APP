@@ -1,10 +1,11 @@
 from audioop import reverse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Task
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView
+from django.contrib.auth.models import User
 
 
 class CustomLoginView(LoginView):
@@ -18,14 +19,19 @@ class CustomLoginView(LoginView):
 
 class TaskView(LoginRequiredMixin, ListView):
     model = Task
+    template_name = "main/new.html"
     context_object_name = "tasks"
 
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Task.objects.filter(user=user)
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tasks'] = context['tasks'].filter(user=self.request.user)
-        context['count'] = context['tasks'].filter(completed=False).count()
-        return context
+
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['tasks'] = context['tasks'].filter(user=self.request.user)
+    #     context['count'] = context['tasks'].filter(completed=False).count()
+    #     return context
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task
