@@ -26,20 +26,20 @@ class TaskView(LoginRequiredMixin, ListView):
     #     user = get_object_or_404(User, username=self.kwargs.get('username'))
     #     return Task.objects.filter(user=user)
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['tasks'] = context['tasks'].filter(user=self.request.user)
-    #     context['count'] = context['tasks'].filter(completed=False).count()
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['tasks'] = context['tasks'].filter(user=self.request.user)
+        context['count'] = context['tasks'].filter(completed=False).count()
+        return context
 
-def UserTaskView(self, request):
-    task = Task.objects.filter(user=self.request.user)
-    user = User.objects.filter(username=self.request.user.username)
-    context = {
-        "task": task,
-        "user": user,
-    }
-    return render(request, "main/new.html", context)
+# def UserTaskView(self, request):
+#     task = Task.objects.filter(user=self.request.user)
+#     user = User.objects.filter(username=self.request.user.username)
+#     context = {
+#         "task": task,
+#         "user": user,
+#     }
+#     return render(request, "main/new.html", context)
 
 class TaskDetailView(LoginRequiredMixin, DetailView):
     model = Task

@@ -9,10 +9,11 @@ from .views import (
     UserTaskView
 )
 from django.contrib.auth import views as auth_views
+from .views import UserTaskView
 
 urlpatterns = [
     path('', TaskView.as_view(), name="home"),
-    path("user/<str:username>/", UserTaskView.as_view(), name="user_task"),
+    path("user/<str:username>/", UserTaskView, name="user_task"),
     path('task-detail/<slug>/', TaskDetailView.as_view(), name="detail"),
     path("task-create/", TaskCreateView.as_view(), name="create"),
     path("task-update/<slug>/", TaskUpdateView.as_view(), name="update"),
